@@ -12,17 +12,15 @@ extension UIViewController {
     
     //set the  presented viewController,
     //originalView: Which being tap in presenting view
-    @available(iOS, deprecated, message: "Use BOTransition (https://cocoapods.org/pods/BOTransition) instead")
     public func cc_setZoomTransition(originalView : UIView) {
         self.modalPresentationStyle = .custom
         self.modalPresentationCapturesStatusBarAppearance = true
-        let transitioner = CCZoomTransitioner.init(vc: self)
+        let transitioner = CCZoomTransitioner()
         transitioner.transitOriginalView = originalView
         self.cc_transitioner = transitioner
         self.transitioningDelegate = self.cc_transitioner
     }
     
-    @available(iOS, deprecated, message: "Use BOTransition (https://cocoapods.org/pods/BOTransition) instead")
     public var cc_swipeBackDisabled : Bool {
         get {
             if let trans = self.cc_transitioner {

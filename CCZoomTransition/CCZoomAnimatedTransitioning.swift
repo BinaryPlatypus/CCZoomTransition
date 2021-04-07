@@ -10,18 +10,18 @@ import UIKit
 
 //AnimatedTransitioning,Looks like to open the APP system effect
 
-class CCZoomAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransitioning {
+open class CCZoomAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransitioning {
     
     //which view being touch in fromeVC， Need to get this view to running the animation
     var transitOriginalView : UIView? = nil
     
     var isPresentation : Bool = true
     
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+    open func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.3
     }
     
-    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+    open func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
         let animateComplete = {
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
@@ -59,10 +59,9 @@ class CCZoomAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransitioni
         }()
         
         toView.frame = toFrame
-        
         //Obtain original view which in presentingView
         let transitview = (self.transitOriginalView ?? (self.isPresentation ? fromView : toView))!
-        
+//
         let originrect = containerView.convert(transitview.frame, from: transitview.superview)
         
         let shadow = UIImageView();
@@ -159,6 +158,7 @@ class CCZoomAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransitioni
                 let imageview = UIImageView.init(image: transitimage)
                 imageview.contentMode = .scaleAspectFill
                 imageview.alpha = 1
+                imageview.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4)
                 imageview.frame = shadow.bounds
                 return imageview
             }()
@@ -222,7 +222,7 @@ class CCZoomAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransitioni
 //supper func
 extension CCZoomAnimatedTransitioning {
     
-    func snapshotView(view : UIView) -> UIImage? {
+    open func snapshotView(view : UIView) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, 0.0)
         if let context = UIGraphicsGetCurrentContext() {
             view.layer.render(in: context)
@@ -234,7 +234,7 @@ extension CCZoomAnimatedTransitioning {
         return nil
     }
     
-    func imageWithColor(color : UIColor) -> UIImage? {
+    open func imageWithColor(color : UIColor) -> UIImage? {
         let size = CGSize.init(width: 1, height: 1)
         UIGraphicsBeginImageContext(size);
         let context = UIGraphicsGetCurrentContext();
@@ -242,7 +242,6 @@ extension CCZoomAnimatedTransitioning {
         context?.fill(CGRect.init(origin: CGPoint.zero, size: size))
         let image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        
         return image
     }
     
