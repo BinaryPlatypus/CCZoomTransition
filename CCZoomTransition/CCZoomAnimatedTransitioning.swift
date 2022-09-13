@@ -222,7 +222,7 @@ open class CCZoomAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransi
 //supper func
 extension CCZoomAnimatedTransitioning {
     
-    open func snapshotView(view : UIView) -> UIImage? {
+    public func snapshotView(view : UIView) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, 0.0)
         if let context = UIGraphicsGetCurrentContext() {
             view.layer.render(in: context)
@@ -234,7 +234,7 @@ extension CCZoomAnimatedTransitioning {
         return nil
     }
     
-    open func imageWithColor(color : UIColor) -> UIImage? {
+    public func imageWithColor(color : UIColor) -> UIImage? {
         let size = CGSize.init(width: 1, height: 1)
         UIGraphicsBeginImageContext(size);
         let context = UIGraphicsGetCurrentContext();
